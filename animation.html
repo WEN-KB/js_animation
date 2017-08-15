@@ -56,12 +56,6 @@
 <script>
     function getId(id){
         return document.getElementById(id)?document.getElementById(id):null;
-//        if(document.getElementById(id)){
-//            return document.getElementById(id);
-//        }else
-//        {
-//            return null;
-//        }
     }
     function getStyle(obj,attr){
         if(document.all){
@@ -72,39 +66,55 @@
     }
     var chare=getId("content");
     console.log(chare);
+//    chare.addEventListener("mouseover",function(){
+//        moving();
+//    },true);
     chare.addEventListener("mouseover",function(){
-        moving();
+        moving(10,0);
+    },true);
+    chare.addEventListener("mouseout",function(){
+        moving(-10,-150);
     },true);
     var timer=null;
-   function moving(){
-       clearInterval(timer);
-       clearInterval(timer1);
-        timer=setInterval(function(){
+   function moving(speed,terminal){
+       clearInterval(chare.timer);
+       chare.timer=null;
+//       clearInterval(timer1);
+        chare.timer=setInterval(function(){
             var sty=getStyle(chare,"left");
-            console.log(sty);
-        if(sty<0){
-            sty+=10;
-        }
-        chare.style.left=sty+"px";
-        },17)
-    }
+//            console.log(sty);
+            if(sty<terminal){
+                if (sty < terminal) {
+                    sty +=speed;
+                }
+                }else {
+                    if(sty>terminal){
+                        sty+=speed;
+                    }
 
-
-    chare.addEventListener("mouseout",function(){
-        fade();
-    },true);
-    var timer1=null;
-    function fade(){
-        clearInterval(timer);
-        clearInterval(timer1);
-        timer1=setInterval(function(){
-            var sty=getStyle(chare,"left");
-            console.log(sty);
-            if(sty>-150){
-                sty-=10;
             }
             chare.style.left=sty+"px";
-        },17)
+            },17)
+
+
     }
+
+
+//    chare.addEventListener("mouseout",function(){
+//        fade();
+//    },true);
+//    var timer1=null;
+//    function fade(){
+//        clearInterval(timer);
+//        clearInterval(timer1);
+//        timer1=setInterval(function(){
+//            var sty=getStyle(chare,"left");
+//            console.log(sty);
+//            if(sty>-150){
+//                sty-=10;
+//            }
+//            chare.style.left=sty+"px";
+//        },17)
+//    }
 </script>
 </html>
