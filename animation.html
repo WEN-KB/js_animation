@@ -3,8 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #content{
+            width: 150px;
+            height: 400px;
+            background:deepskyblue;
+            position: absolute;
+            left:-150px;
+            top: 100px;
+        }
+        li{
+            width: 150px;
+            height: 100px;
+        }
+        #content_ul li:hover{
+            width: 150px;
+            height: 100px;
+            background:blue ;
+        }
+        #title{
+            width: 30px;
+            height: 100px;
+            background-color: bisque;
+            position: absolute;
+            right: -30px;
+            top: 250px;
+        }
+    </style>
 </head>
 <body>
+     <div id="content">
+         <ul id="content_ul">
+             <li></li>
+             <li></li>
+             <li></li>
+             <li></li>
+         </ul>
+         <div id="title">
+
+         </div>
+     </div>
 
 </body>
+<script>
+    function getId(id){
+        return document.getElementById(id);
+    }
+    function getStyle(obj,attr){
+        if(document.all){
+            return parseInt(obj.currentStyle[attr]);
+        }else{
+            return parseInt(getComputedStyle(obj,false)[attr]);
+        }
+    }
+    var chare=getId("content");
+    console.log(chare);
+    chare.addEventListener("mouseover",function(){
+        moving();
+    },true);
+    var timer=null;
+   function moving(){
+       clearInterval(timer);
+       clearInterval(timer1);
+        timer=setInterval(function(){
+            var sty=getStyle(chare,"left");
+            console.log(sty);
+        if(sty<0){
+            sty+=10;
+        }
+        chare.style.left=sty+"px";
+        },17)
+    }
+
+
+    chare.addEventListener("mouseout",function(){
+        fade();
+    },true);
+    var timer1=null;
+    function fade(){
+        clearInterval(timer);
+        clearInterval(timer1);
+        timer1=setInterval(function(){
+            var sty=getStyle(chare,"left");
+            console.log(sty);
+            if(sty>-150){
+                sty-=10;
+            }
+            chare.style.left=sty+"px";
+        },17)
+    }
+</script>
 </html>
